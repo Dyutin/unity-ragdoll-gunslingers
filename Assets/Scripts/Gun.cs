@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+	private AudioSource audioSource;
 	[SerializeField] private KeyCode mouseButton;
 	[SerializeField] private GameObject bullet;
 	[SerializeField] private Transform firePoint;
@@ -10,15 +11,14 @@ public class Gun : MonoBehaviour
 	[SerializeField] private float recoilForce;
     void Start()
     {
-        
+	   audioSource  = GetComponent<AudioSource>();
     }
+    
 
-    void Update()
+    public void Fire(float pitch)
     {
-	    if (Input.GetKeyDown(mouseButton))
-	    {
-		    Instantiate(bullet, firePoint.position, firePoint.rotation);
-		    //playerTrans.gameObject.GetComponent<Rigidbody2D>().AddForce(recoilForce*transform.right, ForceMode2D.Impulse);
-	    }
+	    Instantiate(bullet, firePoint.position, firePoint.rotation);
+	    audioSource.pitch = pitch;
+	    audioSource.PlayOneShot(audioSource.clip,audioSource.volume);
     }
 }

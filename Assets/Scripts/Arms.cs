@@ -17,14 +17,15 @@ public class Arms : MonoBehaviour
 
     private void Update()
     {
-	    HandleAimShooting();
+	  HandleAimShooting();
     }
     
     private void HandleAimShooting()
     {
 	    var lookMousePointer =
 		    Quaternion.LookRotation(cameraMain.ScreenToWorldPoint(Input.mousePosition) - transform.position);
-	    lookMousePointer = Quaternion.Slerp(transform.rotation, lookMousePointer, speed * Time.deltaTime);
-	    rigidBody2D.MoveRotation(lookMousePointer);
+	    var lookMousePointer2 = Quaternion.Slerp(transform.rotation, lookMousePointer, speed * Time.deltaTime);
+	    rigidBody2D.MoveRotation(lookMousePointer2);
+	    //Debug.Log(transform.eulerAngles.magnitude -  lookMousePointer2.eulerAngles.magnitude);
     }
 }
